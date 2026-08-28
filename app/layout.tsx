@@ -7,6 +7,7 @@ import "./premium-extras.css";
 import "./work-premium.css";
 import "./work-wow.css";
 import "./dashboard-premium.css";
+import "./system-wow.css";
 
 export const metadata: Metadata = {
   title: "SGDEA · Electroingeniería",
