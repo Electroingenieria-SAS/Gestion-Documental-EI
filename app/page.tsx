@@ -1,5 +1,5 @@
-import CleanDashboard from "@/components/CleanDashboard";
+import ExecutiveDashboard from "@/components/ExecutiveDashboard";
 
 export default function Home() {
-  return <CleanDashboard />;
+  return <ExecutiveDashboard />;
 }
