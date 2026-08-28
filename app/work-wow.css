@@ -1,0 +1,340 @@
+/* Immersive visual refinement for /trabajo.
+   This layer intentionally changes presentation only: no business logic, routes or data behavior. */
+
+.ui-work-stage{
+  --wow-shadow:0 26px 70px rgba(5,24,45,.14),0 8px 24px rgba(5,24,45,.06);
+  --wow-shadow-hover:0 34px 84px rgba(5,24,45,.21),0 12px 30px rgba(5,24,45,.09);
+}
+
+/* Subtle technical canvas: present but not decorative noise. */
+.ui-work-stage:after{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:-26px -34px -60px;
+  border-radius:34px;
+  background-image:
+    linear-gradient(rgba(7,45,82,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(7,45,82,.025) 1px,transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.8),transparent 88%);
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.8),transparent 88%);
+  pointer-events:none;
+}
+
+/* Hero gets a real visual narrative instead of being a dark rectangle. */
+.ui-work-stage:not(.task-mode) .ui-work-heading{
+  min-height:236px;
+  padding:38px 430px 38px 42px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:32px;
+  box-shadow:0 30px 80px rgba(4,20,38,.25),0 10px 28px rgba(4,20,38,.13),inset 0 1px rgba(255,255,255,.065);
+}
+.ui-work-stage:not(.task-mode) .ui-work-heading::before{
+  content:"FLUJO DOCUMENTAL\A Radicar  →  Clasificar  →  Organizar  →  Archivar";
+  white-space:pre-line;
+  position:absolute;
+  right:35px;
+  top:38px;
+  width:338px;
+  min-height:142px;
+  padding:25px 25px 22px;
+  border-radius:24px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.045));
+  border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 20px 46px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.08);
+  backdrop-filter:blur(12px);
+  color:#fff;
+  font-size:18px;
+  line-height:2.05;
+  font-weight:800;
+  letter-spacing:-.02em;
+  z-index:2;
+}
+.ui-work-stage:not(.task-mode) .ui-work-heading h2{
+  font-size:46px;
+  max-width:650px;
+  text-wrap:balance;
+}
+.ui-work-stage:not(.task-mode) .ui-work-heading p{
+  font-size:16.5px;
+  max-width:660px;
+  color:#cad8e5;
+}
+.ui-work-stage:not(.task-mode) .ui-work-heading::after{
+  right:-72px;
+  bottom:-192px;
+  width:360px;
+  height:360px;
+  box-shadow:0 0 0 48px rgba(245,197,24,.035),0 0 0 96px rgba(245,197,24,.018),0 0 90px rgba(245,197,24,.06);
+}
+
+/* Work cards: clearer hierarchy, deeper elevation and individual identity. */
+.ui-work-actions{
+  gap:24px;
+  margin-top:26px;
+}
+.ui-work-action{
+  min-height:280px;
+  padding:31px 32px 27px;
+  border-radius:29px;
+  border-color:#d6e1eb;
+  box-shadow:var(--wow-shadow);
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s,border-color .28s,filter .28s;
+}
+.ui-work-action::after{
+  position:absolute;
+  right:24px;
+  top:18px;
+  font-size:58px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-.08em;
+  color:rgba(8,40,72,.045);
+  pointer-events:none;
+  z-index:-1;
+}
+.ui-work-action:nth-child(1)::after{content:"01"}
+.ui-work-action:nth-child(2)::after{content:"02"}
+.ui-work-action:nth-child(3)::after{content:"03";color:rgba(255,255,255,.065)}
+.ui-work-action:nth-child(4)::after{content:"04"}
+.ui-work-action:hover{
+  transform:translateY(-9px) scale(1.008);
+  box-shadow:var(--wow-shadow-hover);
+  border-color:#bbcddd;
+}
+.ui-work-action-icon{
+  width:70px;
+  height:70px;
+  border-radius:21px;
+}
+.ui-work-action-icon svg{width:27px;height:27px}
+.ui-work-action h3{
+  font-size:27px;
+  letter-spacing:-.045em;
+}
+.ui-work-action p{
+  font-size:15px;
+  line-height:1.68;
+  max-width:500px;
+}
+.ui-work-action small{font-size:10.5px}
+.ui-work-action>b{
+  min-height:52px;
+  padding-top:18px;
+  font-size:14px;
+}
+.ui-work-action>b span{
+  width:38px;
+  height:38px;
+  border-radius:13px;
+}
+
+/* The organizing flow is intentionally the operational star. */
+.ui-work-action:nth-child(3){
+  color:#fff;
+  border-color:rgba(245,197,24,.32);
+  background:
+    radial-gradient(circle at 90% 4%,rgba(245,197,24,.18),transparent 34%),
+    radial-gradient(circle at 5% 100%,rgba(33,112,176,.20),transparent 35%),
+    linear-gradient(138deg,#071a30 0%,#0a3158 52%,#0b4274 100%);
+  box-shadow:0 28px 68px rgba(5,28,53,.23),0 8px 23px rgba(5,28,53,.11);
+}
+.ui-work-action:nth-child(3)::before{width:6px;opacity:1}
+.ui-work-action:nth-child(3) .ui-work-action-icon{
+  color:#061b32;
+  background:linear-gradient(145deg,#f5c518,#ffdc55);
+  border-color:rgba(255,220,85,.82);
+  box-shadow:0 15px 34px rgba(245,197,24,.21);
+}
+.ui-work-action:nth-child(3) small{color:#acc1d4}
+.ui-work-action:nth-child(3) h3{color:#fff}
+.ui-work-action:nth-child(3) p{color:#c8d7e4}
+.ui-work-action:nth-child(3)>b{border-top-color:rgba(255,255,255,.12);color:#f5c518}
+.ui-work-action:nth-child(3)>b span{background:rgba(245,197,24,.14);color:#f5c518}
+.ui-work-action:nth-child(3):hover>b span{background:#f5c518;color:#061b32}
+
+/* Second and fourth actions remain lighter to keep the page breathable. */
+.ui-work-action:nth-child(2),.ui-work-action:nth-child(4){
+  background:
+    radial-gradient(circle at 100% 0%,rgba(245,197,24,.085),transparent 30%),
+    linear-gradient(180deg,#fff,#fbfdff);
+}
+
+/* Recent work behaves more like a useful continuation surface. */
+.ui-work-recent{margin-top:40px}
+.ui-work-recent .ui-section-head{margin-bottom:16px!important}
+.ui-work-recent .ui-section-head h3{font-size:26px!important;letter-spacing:-.035em!important}
+.ui-work-recent>.ui-card{
+  border-radius:26px!important;
+  box-shadow:0 20px 52px rgba(5,28,53,.105)!important;
+  overflow:hidden!important;
+}
+.ui-work-recent .ui-list-row{
+  min-height:88px!important;
+  padding:18px 22px!important;
+  transition:background .18s ease,padding-left .18s ease!important;
+}
+.ui-work-recent .ui-list-row:hover{
+  padding-left:27px!important;
+  background:linear-gradient(90deg,#f4f8fc,#fff8d9)!important;
+}
+.ui-work-recent .ui-list-main b{font-size:15px!important}
+.ui-work-recent .ui-list-main small{font-size:12px!important}
+.ui-work-recent .ui-list-meta b{font-size:12px!important}
+
+/* Task pages: stronger page title and clear work surface. */
+.ui-work-stage.task-mode .ui-work-heading{
+  padding:6px 4px 24px;
+  margin-bottom:22px;
+  border-bottom:1px solid #dbe5ef;
+}
+.ui-work-stage.task-mode .ui-work-heading h2{font-size:40px}
+.ui-work-stage.task-mode .ui-work-heading p{font-size:16px}
+.ui-work-task-grid{
+  grid-template-columns:minmax(0,1fr) 390px;
+  gap:28px;
+}
+.ui-task-card{
+  border-radius:29px!important;
+  box-shadow:0 28px 72px rgba(5,28,53,.14),0 7px 23px rgba(5,28,53,.06)!important;
+}
+.ui-task-card-head{
+  min-height:132px;
+  padding:28px 31px;
+  background:
+    radial-gradient(circle at 92% -12%,rgba(245,197,24,.19),transparent 32%),
+    linear-gradient(180deg,#fff,#f7fafc);
+}
+.ui-task-icon{
+  width:66px;
+  height:66px;
+  flex-basis:66px;
+  border-radius:20px;
+  box-shadow:0 16px 34px rgba(245,197,24,.23);
+}
+.ui-task-title h3{font-size:28px}
+.ui-task-title p{font-size:13.5px;max-width:560px}
+.ui-task-form{padding:30px 31px 32px;gap:21px!important}
+.ui-form-section{
+  min-height:82px;
+  padding:15px 17px;
+  border-radius:19px;
+  border-color:#d9e5ef;
+  background:linear-gradient(145deg,#f3f7fb,#fbfdff);
+  box-shadow:0 7px 20px rgba(7,27,51,.035);
+}
+.ui-form-section>span{
+  width:46px;
+  height:46px;
+  flex-basis:46px;
+  border-radius:14px;
+  font-size:12px;
+}
+.ui-form-section b{font-size:15px}
+.ui-form-section small{font-size:11.5px}
+.ui-task-form .ui-field>span{font-size:13px!important;margin-bottom:9px!important}
+.ui-task-form .ui-field input,
+.ui-task-form .ui-field select,
+.ui-task-form .ui-field textarea{
+  min-height:58px!important;
+  border-radius:17px!important;
+  padding-left:17px!important;
+  padding-right:17px!important;
+  font-size:14.5px!important;
+  box-shadow:0 3px 11px rgba(7,27,51,.035),inset 0 1px rgba(255,255,255,.8)!important;
+}
+.ui-task-form .ui-field input:focus,
+.ui-task-form .ui-field select:focus,
+.ui-task-form .ui-field textarea:focus{
+  transform:translateY(-1px);
+  box-shadow:0 0 0 4px rgba(20,78,130,.10),0 8px 20px rgba(7,27,51,.06)!important;
+}
+.ui-task-actions{
+  padding-top:23px!important;
+  margin-top:2px!important;
+}
+.ui-task-actions .ui-btn{
+  min-height:52px!important;
+  padding:0 22px!important;
+  font-size:13px!important;
+  border-radius:15px!important;
+}
+.ui-task-actions .ui-btn.yellow{
+  box-shadow:0 13px 28px rgba(245,197,24,.24)!important;
+}
+
+/* Side guidance is now a deliberate visual anchor. */
+.ui-task-aside{
+  border-radius:28px!important;
+  box-shadow:0 26px 68px rgba(5,28,53,.19)!important;
+  overflow:hidden!important;
+  position:sticky!important;
+  top:94px!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+}
+.ui-aside-visual{
+  padding:31px 29px 29px!important;
+  background:
+    radial-gradient(circle at 88% 4%,rgba(245,197,24,.18),transparent 30%),
+    linear-gradient(145deg,#041426,#0a3158)!important;
+}
+.ui-aside-visual>span{
+  width:58px!important;
+  height:58px!important;
+  border-radius:18px!important;
+  box-shadow:0 13px 28px rgba(245,197,24,.20)!important;
+}
+.ui-aside-visual h4{font-size:23px!important;line-height:1.18!important;letter-spacing:-.035em!important}
+.ui-aside-visual p{font-size:13px!important;line-height:1.65!important}
+.ui-aside-checklist{padding:22px 23px!important}
+.ui-aside-checklist>div{min-height:66px!important;padding:10px 0!important}
+.ui-aside-checklist>div>span{width:34px!important;height:34px!important;font-size:11px!important}
+.ui-aside-checklist b{font-size:13px!important}
+.ui-aside-checklist small{font-size:11px!important;line-height:1.45!important}
+.ui-aside-note{margin:0 22px 23px!important;padding:15px!important;border-radius:16px!important}
+.ui-aside-note b{font-size:12.5px!important}
+.ui-aside-note span{font-size:11px!important;line-height:1.5!important}
+
+/* Accessible movement. */
+@keyframes wowCardIn{
+  from{opacity:0;transform:translateY(14px) scale(.985)}
+  to{opacity:1;transform:none}
+}
+.ui-work-actions .ui-work-action{animation:wowCardIn .48s cubic-bezier(.22,1,.36,1) both}
+.ui-work-actions .ui-work-action:nth-child(2){animation-delay:.045s}
+.ui-work-actions .ui-work-action:nth-child(3){animation-delay:.09s}
+.ui-work-actions .ui-work-action:nth-child(4){animation-delay:.135s}
+
+@media(max-width:1180px){
+  .ui-work-stage:not(.task-mode) .ui-work-heading{padding-right:36px}
+  .ui-work-stage:not(.task-mode) .ui-work-heading::before{display:none}
+  .ui-work-task-grid{grid-template-columns:minmax(0,1fr) 330px}
+}
+@media(max-width:960px){
+  .ui-work-stage:not(.task-mode) .ui-work-heading{min-height:205px;padding:32px}
+  .ui-work-stage:not(.task-mode) .ui-work-heading h2{font-size:39px}
+  .ui-work-actions{grid-template-columns:1fr}
+  .ui-work-action{min-height:230px}
+  .ui-work-task-grid{grid-template-columns:1fr}
+  .ui-task-aside{position:relative!important;top:auto!important}
+}
+@media(max-width:650px){
+  .ui-work-stage:not(.task-mode) .ui-work-heading{min-height:190px;border-radius:25px;padding:27px 23px}
+  .ui-work-stage:not(.task-mode) .ui-work-heading h2{font-size:32px}
+  .ui-work-stage:not(.task-mode) .ui-work-heading p{font-size:14.5px}
+  .ui-work-action{min-height:235px;padding:25px 23px 22px;grid-template-columns:58px minmax(0,1fr);gap:16px;border-radius:24px}
+  .ui-work-action-icon{width:58px;height:58px;border-radius:18px}
+  .ui-work-action h3{font-size:22px}
+  .ui-work-action p{font-size:13.5px}
+  .ui-work-stage.task-mode .ui-work-heading h2{font-size:32px}
+  .ui-task-card-head{padding:23px 20px;align-items:flex-start;flex-direction:column}
+  .ui-task-form{padding:23px 20px 25px}
+  .ui-form-section{min-height:76px}
+}
+@media(prefers-reduced-motion:reduce){
+  .ui-work-actions .ui-work-action{animation:none!important;transition:none!important}
+  .ui-work-action:hover{transform:none!important}
+  .ui-task-form .ui-field input:focus,.ui-task-form .ui-field select:focus,.ui-task-form .ui-field textarea:focus{transform:none}
+}
