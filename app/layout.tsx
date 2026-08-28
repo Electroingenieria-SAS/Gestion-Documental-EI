@@ -10,7 +10,8 @@ import "./dashboard-premium.css";
 import "./system-wow.css";
 import "./signature-25d.css";
 import "./modules-refined.css";
-import "./navigation-typography.css";
+import "./editorial-system.css";
+import "./shell-rebuild.css";
 
 export const metadata: Metadata = {
   title: "SGDEA · Electroingeniería",
