@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 const TARGETS: Record<string, string[]> = {
   dashboard: ["Tablero"],
-  trd: ["TRD maestra"],
   expedientes: ["Expedientes"],
   fuid: ["FUID / Inventario", "Inventario FUID"],
   radicacion: ["Radicación"],
@@ -23,6 +22,10 @@ const TARGETS: Record<string, string[]> = {
 export default function NavigationBridge() {
   useEffect(() => {
     const target = window.location.hash.replace("#", "").trim().toLowerCase();
+    if (target === "trd") {
+      window.location.replace("/trd");
+      return;
+    }
     if (!target || !TARGETS[target]) return;
     let tries = 0;
     const timer = window.setInterval(() => {
