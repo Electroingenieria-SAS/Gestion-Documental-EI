@@ -1,5 +1,3 @@
 import { redirect } from "next/navigation";
 
-export default function FormatsPage(){
-  redirect("/procesos");
-}
+export default function FormatsPage(){redirect("/trabajo")}
