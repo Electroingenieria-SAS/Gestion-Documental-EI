@@ -4,6 +4,7 @@ import "./globals.css";
 import "./product.css";
 import "./premium.css";
 import "./premium-extras.css";
+import "./work-premium.css";
 
 export const metadata: Metadata = {
   title: "SGDEA · Electroingeniería",
