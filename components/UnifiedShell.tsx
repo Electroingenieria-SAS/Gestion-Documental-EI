@@ -54,15 +54,17 @@ export default function UnifiedShell({ children, eyebrow, title, actions }: Prop
   if(!profile)return <main className="ui-loading"><div className="ui-loading-mark">GD</div><b>Preparando tu espacio documental…</b></main>;
 
   return <div className="ui-app">
+    <div className="ui-ambient-scene" aria-hidden="true"><span className="a1"/><span className="a2"/><span className="a3"/></div>
     {menu&&<div className="ui-overlay" onClick={()=>setMenu(false)}/>} 
     <aside className={`ui-sidebar ${menu?"open":""}`}>
       <Link className="ui-brand" href="/" onClick={()=>setMenu(false)}><span className="ui-brand-mark">GD</span><div><b>SGDEA</b><small>ELECTROINGENIERÍA S.A.S.</small></div></Link>
       <div className="ui-nav-section"><div className="ui-nav-label">NAVEGACIÓN</div><nav className="ui-nav">{NAV.map(n=><Link key={n.href} className={active(n.href)?"active":""} href={n.href} onClick={()=>setMenu(false)}><span className="ui-nav-icon"><Icon name={n.icon}/></span><span className="ui-nav-copy"><b>{n.label}</b><small>{n.desc}</small></span><span className="ui-nav-arrow">›</span></Link>)}</nav></div>
       <div className="ui-sidebar-spacer"/>
-      <div className="ui-sidebar-note"><span>CLASIFICACIÓN DOCUMENTAL</span><p>La TRD se define una sola vez en el expediente. El resto del proceso reutiliza esa información y conserva su trazabilidad.</p></div>
+      <div className="ui-lifecycle-mini"><span>CICLO DOCUMENTAL</span><div className="ui-lifecycle-track"><div className="ui-life-step"><b>01</b><div><strong>Registrar</strong><small>Entrada y radicación</small></div></div><div className="ui-life-step"><b>02</b><div><strong>Clasificar</strong><small>Expediente + TRD</small></div></div><div className="ui-life-step"><b>03</b><div><strong>Organizar</strong><small>FUID, carpeta y caja</small></div></div><div className="ui-life-step"><b>04</b><div><strong>Conservar</strong><small>Transferencia y retención</small></div></div></div></div>
+      <div className="ui-sidebar-note"><span>FUENTE ÚNICA</span><p>La clasificación TRD se define una sola vez en el expediente. El resto del proceso la hereda y conserva su trazabilidad.</p></div>
     </aside>
     <section className="ui-shell">
-      <header className="ui-topbar"><button className="ui-mobile-menu" onClick={()=>setMenu(true)} aria-label="Abrir menú"><Icon name="menu"/></button><div className="ui-top-title"><span>{eyebrow}</span><h1>{title}</h1></div><div className="ui-top-right">{actions}<span className="ui-system-state"><i/> Sistema operativo</span><div className="ui-user"><span className="ui-avatar">{initials}</span><div><b>{profile.full_name||profile.email}</b><small>{ROLE[profile.role]||profile.role} · {office}</small></div></div><button className="ui-logout" onClick={logout} title="Cerrar sesión" aria-label="Cerrar sesión"><Icon name="logout"/></button></div></header>
+      <header className="ui-topbar"><button className="ui-mobile-menu" onClick={()=>setMenu(true)} aria-label="Abrir menú"><Icon name="menu"/></button><div className="ui-top-title"><span>{eyebrow}</span><h1>{title}</h1></div><div className="ui-top-right"><div className="ui-global-quick"><Link href="/trabajo?accion=radicar" className="primary"><i>＋</i> Radicar</Link><Link href="/trabajo/organizar"><i>◎</i> Organizar</Link></div>{actions}<span className="ui-system-state"><i/> Sistema operativo</span><div className="ui-user"><span className="ui-avatar">{initials}</span><div><b>{profile.full_name||profile.email}</b><small>{ROLE[profile.role]||profile.role} · {office}</small></div></div><button className="ui-logout" onClick={logout} title="Cerrar sesión" aria-label="Cerrar sesión"><Icon name="logout"/></button></div></header>
       <main className="ui-content">{children}</main>
     </section>
   </div>
