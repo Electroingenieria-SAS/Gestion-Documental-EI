@@ -1,2 +1,9 @@
 import FormatsWorkspace from "@/components/FormatsWorkspace";
-export default function FormatsPage() { return <FormatsWorkspace />; }
+import NavigationBridge from "@/components/NavigationBridge";
+
+export default function FormatsPage() {
+  return <>
+    <NavigationBridge />
+    <FormatsWorkspace />
+  </>;
+}
