@@ -1,0 +1,26 @@
+:root{
+  --sg-card-display:"Aptos Display","Segoe UI Variable Display","Century Gothic",CenturyGothic,Arial,sans-serif;
+  --sg-card-body:"Aptos","Century Gothic",CenturyGothic,"Segoe UI",Arial,sans-serif;
+  --sg-card-title:#071b33;
+  --sg-card-copy:#657b8f;
+}
+
+/* Centralized typography system for product surfaces. */
+.ui-work-action h3,.ui-action-card h3,.ui-hero-action h3,.settings-card h3,
+.module-panel-head h3,.archive-flow h3,.archive-alerts h3,.control-queue h3,.control-legend h3,
+.ui-section-head h3,.ui-task-card-head h3,.ui-page-head h2,.ui-work-heading h2,.module-hero h2,.exec-hero h1,
+.module-kpi strong,.module-status b,.ui-metric b,.trd-stat b,.trd-tree-head b,.ui-list-main b,.ui-table td b{
+  font-family:var(--sg-card-display);
+  font-feature-settings:"kern" 1,"liga" 1;
+}
+
+.ui-work-action h3{font-size:25px;line-height:1.08;font-weight:850;letter-spacing:-.042em}.ui-work-action p{font-family:var(--sg-card-body);font-size:14.5px;line-height:1.58;font-weight:500;color:var(--sg-card-copy)}.ui-work-action.primary p,.ui-work-action.featured p{color:#afc2d2}.ui-work-action small{font-size:9px;font-weight:900;letter-spacing:.12em}.ui-work-action>b{font-family:var(--sg-card-display);font-size:11px;font-weight:850}
+.ui-action-card h3{font-size:20px;line-height:1.16;font-weight:850;letter-spacing:-.034em}.ui-action-card p{font-size:12px;line-height:1.6;font-weight:500}.ui-action-card footer span,.ui-action-card footer b{font-size:10px}
+.settings-card h3{font-size:22px;line-height:1.12;font-weight:850;letter-spacing:-.04em}.settings-card p{font-size:12.5px;line-height:1.62}.settings-card footer{font-size:10.5px}
+.module-panel-head h3{font-size:21px;line-height:1.15;font-weight:850;letter-spacing:-.034em}.module-panel-head p{font-size:11px;line-height:1.5}.module-panel-head span{font-size:8.5px}.module-kpi strong{font-size:35px;font-weight:900;letter-spacing:-.055em}.module-kpi p{font-size:11px;line-height:1.48}.module-kpi small{font-size:9px}.module-status b{font-size:22px;font-weight:850}.module-status small{font-size:10.5px}
+.ui-section-head h3{font-size:18px;font-weight:850;letter-spacing:-.03em}.ui-section-head p{font-size:10px;line-height:1.5}.ui-metric b{font-size:28px;font-weight:900;letter-spacing:-.052em}.ui-metric small,.ui-metric span{font-size:8.5px;line-height:1.4}
+.ui-list-main b{font-size:11.5px;font-weight:800;line-height:1.32}.ui-list-main small{font-size:9px;line-height:1.4}.ui-list-meta b{font-size:9.5px}.ui-list-meta small{font-size:8.5px}
+.ui-table th{font-family:var(--sg-card-body);font-size:8.5px;font-weight:900}.ui-table td{font-family:var(--sg-card-body);font-size:10.5px;line-height:1.45}.ui-table td b{font-size:11px;font-weight:800}.ui-table td small{font-size:8.5px}.ui-pill{font-size:8.5px;font-weight:900;min-height:26px}
+.ui-field>span{font-family:var(--sg-card-body);font-size:10px;font-weight:850}.ui-field input,.ui-field select,.ui-field textarea{font-family:var(--sg-card-body);font-size:11.5px}.ui-field small{font-size:8.5px}.ui-btn,.exec-btn{font-family:var(--sg-card-display);font-size:10.5px;font-weight:850;letter-spacing:-.012em}
+
+@media(max-width:650px){.ui-work-action h3{font-size:22px}.module-panel-head h3{font-size:19px}.ui-action-card h3,.settings-card h3{font-size:19px}.ui-table td{font-size:10px}}
