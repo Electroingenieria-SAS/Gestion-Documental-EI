@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import "./globals.css";
 import "./product.css";
 import "./premium.css";
+import "./premium-extras.css";
 
 export const metadata: Metadata = {
   title: "SGDEA · Electroingeniería",
