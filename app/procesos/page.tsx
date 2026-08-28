@@ -1,5 +1,3 @@
-import ProcessHub from "@/components/ProcessHub";
+import { redirect } from "next/navigation";
 
-export default function ProcessesPage(){
-  return <ProcessHub />;
-}
+export default function ProcessesPage(){redirect("/trabajo")}
