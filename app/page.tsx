@@ -1,5 +1,5 @@
-import SGDEAHome from "@/components/SGDEAHome";
+import CleanDashboard from "@/components/CleanDashboard";
 
 export default function Home() {
-  return <SGDEAHome />;
+  return <CleanDashboard />;
 }
