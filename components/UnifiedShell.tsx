@@ -18,7 +18,12 @@ const NAV: { href:string; label:string; desc:string; icon:IconName }[] = [
 ];
 
 const ROLE: Record<string,string> = {
-  super_admin:"Super administrador", records_admin:"Administrador documental", office_admin:"Administrador de dependencia", editor:"Editor", viewer:"Consulta", auditor:"Auditor"
+  super_admin:"Super administrador",
+  records_admin:"Administrador documental",
+  office_admin:"Administrador de dependencia",
+  editor:"Editor",
+  viewer:"Consulta",
+  auditor:"Auditor"
 };
 
 function Icon({name}:{name:IconName}){
@@ -32,6 +37,13 @@ function Icon({name}:{name:IconName}){
   return <svg {...common}><path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"/></svg>;
 }
 
+const CYCLE = [
+  ["01","Registrar","Entrada y radicación"],
+  ["02","Clasificar","Expediente + TRD"],
+  ["03","Organizar","FUID, carpeta y caja"],
+  ["04","Conservar","Transferencia y retención"],
+] as const;
+
 export default function UnifiedShell({ children, eyebrow, title, actions }: Props) {
   const pathname = usePathname();
   const router = useRouter();
@@ -44,8 +56,11 @@ export default function UnifiedShell({ children, eyebrow, title, actions }: Prop
     if(!s.session){router.replace("/login");return}
     const {data:p}=await supabase.from("profiles").select("*,organizational_units(name)").eq("id",s.session.user.id).maybeSingle();
     if(!p||!p.active){await supabase.auth.signOut();router.replace("/login");return}
-    setProfile(p as Profile); setOffice(p.organizational_units?.name||"Acceso institucional");
+    setProfile(p as Profile);
+    setOffice(p.organizational_units?.name||"Acceso institucional");
   })()},[router]);
+
+  useEffect(()=>{setMenu(false)},[pathname]);
 
   async function logout(){await supabase.auth.signOut();router.replace("/login")}
   const initials=(profile?.full_name||profile?.email||"GD").split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase();
@@ -53,19 +68,52 @@ export default function UnifiedShell({ children, eyebrow, title, actions }: Prop
 
   if(!profile)return <main className="ui-loading"><div className="ui-loading-mark">GD</div><b>Preparando tu espacio documental…</b></main>;
 
-  return <div className="ui-app">
-    <div className="ui-ambient-scene" aria-hidden="true"><span className="a1"/><span className="a2"/><span className="a3"/></div>
-    {menu&&<div className="ui-overlay" onClick={()=>setMenu(false)}/>} 
-    <aside className={`ui-sidebar ${menu?"open":""}`}>
-      <Link className="ui-brand" href="/" onClick={()=>setMenu(false)}><span className="ui-brand-mark">GD</span><div><b>SGDEA</b><small>ELECTROINGENIERÍA S.A.S.</small></div></Link>
-      <div className="ui-nav-section"><div className="ui-nav-label">NAVEGACIÓN</div><nav className="ui-nav">{NAV.map(n=><Link key={n.href} className={active(n.href)?"active":""} href={n.href} onClick={()=>setMenu(false)}><span className="ui-nav-icon"><Icon name={n.icon}/></span><span className="ui-nav-copy"><b>{n.label}</b><small>{n.desc}</small></span><span className="ui-nav-arrow">›</span></Link>)}</nav></div>
-      <div className="ui-sidebar-spacer"/>
-      <div className="ui-lifecycle-mini"><span>CICLO DOCUMENTAL</span><div className="ui-lifecycle-track"><div className="ui-life-step"><b>01</b><div><strong>Registrar</strong><small>Entrada y radicación</small></div></div><div className="ui-life-step"><b>02</b><div><strong>Clasificar</strong><small>Expediente + TRD</small></div></div><div className="ui-life-step"><b>03</b><div><strong>Organizar</strong><small>FUID, carpeta y caja</small></div></div><div className="ui-life-step"><b>04</b><div><strong>Conservar</strong><small>Transferencia y retención</small></div></div></div></div>
-      <div className="ui-sidebar-note"><span>FUENTE ÚNICA</span><p>La clasificación TRD se define una sola vez en el expediente. El resto del proceso la hereda y conserva su trazabilidad.</p></div>
+  return <div className="sgx-root">
+    {menu&&<button className="sgx-overlay" onClick={()=>setMenu(false)} aria-label="Cerrar menú"/>}
+
+    <aside className={`sgx-sidebar ${menu?"is-open":""}`} aria-label="Navegación principal">
+      <div className="sgx-sidebar-scroll">
+        <Link className="sgx-brand" href="/" onClick={()=>setMenu(false)}>
+          <span className="sgx-brand-mark">GD</span>
+          <span className="sgx-brand-copy"><strong>SGDEA</strong><small>ELECTROINGENIERÍA S.A.S.</small></span>
+        </Link>
+
+        <section className="sgx-nav-block">
+          <div className="sgx-nav-label">NAVEGACIÓN</div>
+          <nav className="sgx-nav">
+            {NAV.map(n=><Link key={n.href} className={`sgx-nav-link ${active(n.href)?"is-active":""}`} href={n.href} onClick={()=>setMenu(false)}>
+              <span className="sgx-nav-icon"><Icon name={n.icon}/></span>
+              <span className="sgx-nav-copy"><strong>{n.label}</strong><small>{n.desc}</small></span>
+              <span className="sgx-nav-arrow">›</span>
+            </Link>)}
+          </nav>
+        </section>
+
+        <div className="sgx-sidebar-lower">
+          <section className="sgx-cycle">
+            <span>CICLO DOCUMENTAL</span>
+            <div className="sgx-cycle-list">{CYCLE.map(([num,name,desc])=><div className="sgx-cycle-step" key={num}><b>{num}</b><div><strong>{name}</strong><small>{desc}</small></div></div>)}</div>
+          </section>
+          <section className="sgx-source-note"><span>FUENTE ÚNICA</span><p>La clasificación TRD se define una sola vez en el expediente. El resto del proceso la hereda y conserva su trazabilidad.</p></section>
+        </div>
+      </div>
     </aside>
-    <section className="ui-shell">
-      <header className="ui-topbar"><button className="ui-mobile-menu" onClick={()=>setMenu(true)} aria-label="Abrir menú"><Icon name="menu"/></button><div className="ui-top-title"><span>{eyebrow}</span><h1>{title}</h1></div><div className="ui-top-right"><div className="ui-global-quick"><Link href="/trabajo?accion=radicar" className="primary"><i>＋</i> Radicar</Link><Link href="/trabajo/organizar"><i>◎</i> Organizar</Link></div>{actions}<span className="ui-system-state"><i/> Sistema operativo</span><div className="ui-user"><span className="ui-avatar">{initials}</span><div><b>{profile.full_name||profile.email}</b><small>{ROLE[profile.role]||profile.role} · {office}</small></div></div><button className="ui-logout" onClick={logout} title="Cerrar sesión" aria-label="Cerrar sesión"><Icon name="logout"/></button></div></header>
-      <main className="ui-content">{children}</main>
+
+    <section className="sgx-workspace">
+      <header className="sgx-topbar">
+        <div className="sgx-top-left">
+          <button className="sgx-mobile-menu" onClick={()=>setMenu(true)} aria-label="Abrir menú"><Icon name="menu"/></button>
+          <div className="sgx-title"><span>{eyebrow}</span><h1>{title}</h1></div>
+        </div>
+        <div className="sgx-top-right">
+          <div className="sgx-quick"><Link href="/trabajo?accion=radicar" className="primary">＋ Radicar</Link><Link href="/trabajo/organizar">◎ Organizar</Link></div>
+          {actions}
+          <span className="sgx-system"><i/> Sistema operativo</span>
+          <div className="sgx-user"><span className="sgx-avatar">{initials}</span><div className="sgx-user-copy"><strong>{profile.full_name||profile.email}</strong><small>{ROLE[profile.role]||profile.role} · {office}</small></div></div>
+          <button className="sgx-logout" onClick={logout} title="Cerrar sesión" aria-label="Cerrar sesión"><Icon name="logout"/></button>
+        </div>
+      </header>
+      <main className="sgx-content">{children}</main>
     </section>
   </div>
 }
