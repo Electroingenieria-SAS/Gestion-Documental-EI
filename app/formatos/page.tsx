@@ -1,9 +1,5 @@
-import FormatsWorkspace from "@/components/FormatsWorkspace";
-import NavigationBridge from "@/components/NavigationBridge";
+import { redirect } from "next/navigation";
 
-export default function FormatsPage() {
-  return <>
-    <NavigationBridge />
-    <FormatsWorkspace />
-  </>;
+export default function FormatsPage(){
+  redirect("/procesos");
 }
