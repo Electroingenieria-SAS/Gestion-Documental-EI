@@ -1,5 +1,3 @@
-import TrdWorkspace from "@/components/TrdWorkspace";
+import CleanTrdCenter from "@/components/CleanTrdCenter";
 
-export default function TrdPage() {
-  return <TrdWorkspace />;
-}
+export default function TrdPage(){return <CleanTrdCenter/>}
