@@ -1,5 +1,3 @@
-import DocumentOrganizationWorkspace from "@/components/DocumentOrganizationWorkspace";
+import { redirect } from "next/navigation";
 
-export default function OrganizationProcessPage(){
-  return <DocumentOrganizationWorkspace />;
-}
+export default function OrganizationProcessPage(){redirect("/trabajo/organizar")}
